@@ -1,5 +1,22 @@
 let socket = io();
 
+function scrollToBottom() {
+    // Selectors
+    let messages = document.querySelector('#messages');
+    let newMessage = messages.lastElementChild;
+    //Heights
+    let clientHeight = messages.clientHeight;
+    let scrollTop = messages.scrollTop;
+    let scrollHeight = messages.scrollHeight;
+    let newMessageHeight = newMessage.clientHeight;
+    let lastMessageHeight = newMessage.clientHeight;
+
+        if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
+            console.log('Scrolling');
+            messages.scrollTop = scrollHeight;
+        }
+}
+
 socket.on('connect', function() {
     console.log('Connected to server');
 });
@@ -16,8 +33,8 @@ socket.on('newMessage', function(message) {
         from: message.from,
         createdAt: formattedTime
     });
-
     document.querySelector('#messages').insertAdjacentHTML('beforeend', html);
+    scrollToBottom();
 });
 
 socket.on('newLocationMessage', function(message) {
@@ -28,8 +45,8 @@ socket.on('newLocationMessage', function(message) {
         createdAt: formattedTime,   
         url: message.url
     });
-    //let li = `<li>${message.from} ${formattedTime}: <a target="_blank" href="${message.url}">My current location</a></li>`;
     document.querySelector('#messages').insertAdjacentHTML('beforeend', html);
+    scrollToBottom();
 });
 
 document.querySelector('#message-form').addEventListener('submit', function(e) {
