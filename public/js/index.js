@@ -10,14 +10,26 @@ socket.on('disconnect', function() {
 
 socket.on('newMessage', function(message) {
     let formattedTime = moment(message.createdAt).format('h:mm a');
-    let li = `<li>${message.from} ${formattedTime}: ${message.text} </li>`;
-    document.querySelector('#messages').insertAdjacentHTML('beforeend', li);
+    let template = document.querySelector('#message-template').innerHTML;
+    let html = Mustache.render(template, {
+        text: message.text,
+        from: message.from,
+        createdAt: formattedTime
+    });
+
+    document.querySelector('#messages').insertAdjacentHTML('beforeend', html);
 });
 
 socket.on('newLocationMessage', function(message) {
     let formattedTime = moment(message.createdAt).format('h:mm a');
-    let li = `<li>${message.from} ${formattedTime}: <a target="_blank" href="${message.url}">My current location</a></li>`;
-    document.querySelector('#messages').insertAdjacentHTML('beforeend', li);
+    let template = document.querySelector('#location-message-template').innerHTML;
+    let html = Mustache.render(template, {
+        from: message.from,
+        createdAt: formattedTime,   
+        url: message.url
+    });
+    //let li = `<li>${message.from} ${formattedTime}: <a target="_blank" href="${message.url}">My current location</a></li>`;
+    document.querySelector('#messages').insertAdjacentHTML('beforeend', html);
 });
 
 document.querySelector('#message-form').addEventListener('submit', function(e) {
