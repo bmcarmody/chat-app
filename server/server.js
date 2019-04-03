@@ -8,7 +8,7 @@ const { isRealString } = require('../server/utils/validation');
 const { Users } = require('./utils/users');
 
 const publicPath = path.join(__dirname, '../public');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
@@ -17,11 +17,18 @@ let users = new Users();
 app.use(express.static(publicPath));
 
 io.on('connection', socket => {
-  console.log('New user connected');
-
   socket.on('join', (params, callback) => {
     if (!isRealString(params.name) || !isRealString(params.room)) {
-      return callback('Name and room name are required');
+      const errors = {};
+      if (!isRealString(params.name)) {
+        errors.name = 'Name is required';
+      }
+
+      if (!isRealString(params.room)) {
+        errors.room = 'Room is required';
+      }
+
+      callback(errors);
     }
 
     socket.join(params.room);
