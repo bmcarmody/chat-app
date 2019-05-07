@@ -4,7 +4,8 @@ import io from 'socket.io-client';
 
 import SocketContext from './store/socket-context';
 
-import Login from './components/Login';
+import Login from './components/pages/Login';
+import ChatPage from './components/pages/ChatPage';
 
 const endpoint = 'http://localhost:5000';
 const socket = io(endpoint);
@@ -14,6 +15,7 @@ const App = () => {
     <SocketContext.Provider value={socket}>
       <Router>
         <Route path="/" exact component={Login} />
+        <Route path="/chat/room=:room" exact component={ChatPage} />
       </Router>
     </SocketContext.Provider>
   );

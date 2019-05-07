@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import SocketContext from '../store/socket-context';
+import SocketContext from '../../store/socket-context';
 
 const Login = props => {
   const [name, setName] = useState(null);
@@ -14,6 +14,8 @@ const Login = props => {
     socket.emit('join', params, err => {
       if (err) {
         setErrors(err);
+      } else {
+        props.history.push(`./chat/room=${room}`, { user: name });
       }
     });
   };
