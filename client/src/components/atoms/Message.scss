@@ -1,0 +1,28 @@
+.message {
+  padding: 2rem;
+  font-size: 2rem;
+  position: relative;
+
+  &__image {
+    width: 5rem;
+    border-radius: 50%;
+    float: left;
+    margin-right: 2rem;
+  }
+
+  &__createdAt {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+  }
+
+  &__body {
+    overflow: hidden;
+    width: 75rem;
+  }
+
+  &:nth-child(even) {
+    background: #f8fbff;
+  }
+}

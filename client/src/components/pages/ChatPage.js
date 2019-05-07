@@ -5,6 +5,7 @@ import SocketContext from '../../store/socket-context';
 const ChatPage = props => {
   const [text, setText] = useState('');
   const [chat, setChat] = useState([]);
+  const [userList, setUserList] = useState([]);
 
   const socket = useContext(SocketContext);
 
@@ -13,17 +14,10 @@ const ChatPage = props => {
   };
 
   const sendMessage = () => {
-    socket.emit(
-      'createMessage',
-      {
-        text
-      },
-      () => {}
-    );
+    socket.emit('createMessage', { text }, () => {});
   };
 
   socket.on('newMessage', message => {
-    console.log(message);
     setChat([
       ...chat,
       <Message
@@ -35,18 +29,43 @@ const ChatPage = props => {
     ]);
   });
 
+  socket.on('updateUserList', users => {
+    setUserList([...users]);
+    console.log(props);
+  });
+
   return (
     <div className="chatPage">
-      <ol className="chatPage__chat">{chat.map(message => message)}</ol>
-      <input
-        name="message"
-        type="text"
-        placeholder="Message"
-        autoFocus
-        autoComplete="off"
-        onChange={onChange}
-      />
-      <button onClick={sendMessage}>Send</button>
+      <div className="chatPage__userPanel">
+        <h1>Users</h1>
+        <ul className="chatPage__userPanel__users">
+          {userList.map(user => (
+            <li key={user}>{user}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="chatPage__chatPanel">
+        <ol className="chatPage__chatPanel__chat">
+          {chat.map(message => message)}
+        </ol>
+        <div className="chatPage__chatPanel__bottom-bar">
+          <input
+            name="message"
+            type="text"
+            placeholder="Message"
+            autoFocus
+            autoComplete="off"
+            onChange={onChange}
+            className="chatPage__chatPanel__bottom-bar__input"
+          />
+          <button
+            onClick={sendMessage}
+            className="chatPage__chatPanel__bottom-bar__button"
+          >
+            Send
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,56 @@
+.chatPage {
+  display: flex;
+  height: 100vh;
+  position: relative;
+
+  &__userPanel {
+    background: #323232;
+    width: 40rem;
+    color: white;
+    h1 {
+      padding: 2rem;
+    }
+    &__users {
+      list-style: none;
+      li {
+        font-size: 2rem;
+        background: #272727;
+        padding: 2rem;
+
+        &:nth-child(even) {
+          background: #323232;
+        }
+      }
+    }
+  }
+
+  &__chatPanel {
+    position: relative;
+    width: 100%;
+    &__chat {
+      list-style: none;
+    }
+
+    &__bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+
+      &__input {
+        height: 6rem;
+        width: calc(100% - 10rem);
+        padding: 1rem;
+        font-size: 1.5rem;
+      }
+
+      &__button {
+        height: 6rem;
+        width: 10rem;
+        background: #e74c3c;
+        color: white;
+        outline: none;
+      }
+    }
+  }
+}

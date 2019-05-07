@@ -29,8 +29,10 @@ const Login = props => {
   };
   return (
     <React.Fragment>
+      <label htmlFor="name">Name </label>
       <input type="textbox" name="name" onChange={onChange} /> <br />
       {errors.name && <div>{errors.name}</div>}
+      <label htmlFor="room">Room </label>
       <input type="textbox" name="room" onChange={onChange} /> <br />
       {errors.room && <div>{errors.room}</div>}
       <button type="submit" onClick={onClick}>
