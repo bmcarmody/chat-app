@@ -19,6 +19,10 @@ const ChatPage = props => {
     }
   };
 
+  const exitRoom = () => {
+    props.history.push('/');
+  };
+
   const sendMessage = () => {
     setText('');
     socket.emit('createMessage', { text }, () => {});
@@ -49,6 +53,12 @@ const ChatPage = props => {
             <li key={user}>{user}</li>
           ))}
         </ul>
+        <button
+          className="chatPage__userPanel__exit font__heading"
+          onClick={exitRoom}
+        >
+          Exit Chat Room
+        </button>
       </div>
       <div className="chatPage__chatPanel">
         <ol className="chatPage__chatPanel__chat">

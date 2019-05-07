@@ -41,7 +41,9 @@ io.on('connection', socket => {
         'newMessage',
         generateMessage(
           'Admin',
-          `Welcome ${params.name}, you are now in "${params.room}" chat room`
+          `Welcome ${params.name}, you are now in the "${
+            params.room
+          }" chat room`
         )
       );
       socket.broadcast
