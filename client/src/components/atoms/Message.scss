@@ -3,11 +3,8 @@
   font-size: 2rem;
   position: relative;
 
-  &__image {
-    width: 5rem;
-    border-radius: 50%;
-    float: left;
-    margin-right: 2rem;
+  &__from {
+    padding-bottom: 0.5rem;
   }
 
   &__createdAt {

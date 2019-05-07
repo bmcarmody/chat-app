@@ -13,7 +13,14 @@ const ChatPage = props => {
     setText(e.target.value);
   };
 
+  const onEnter = e => {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  };
+
   const sendMessage = () => {
+    setText('');
     socket.emit('createMessage', { text }, () => {});
   };
 
@@ -31,13 +38,12 @@ const ChatPage = props => {
 
   socket.on('updateUserList', users => {
     setUserList([...users]);
-    console.log(props);
   });
 
   return (
     <div className="chatPage">
       <div className="chatPage__userPanel">
-        <h1>Users</h1>
+        <h1 className="font__heading">Users</h1>
         <ul className="chatPage__userPanel__users">
           {userList.map(user => (
             <li key={user}>{user}</li>
@@ -57,10 +63,12 @@ const ChatPage = props => {
             autoComplete="off"
             onChange={onChange}
             className="chatPage__chatPanel__bottom-bar__input"
+            value={text}
+            onKeyPress={onEnter}
           />
           <button
             onClick={sendMessage}
-            className="chatPage__chatPanel__bottom-bar__button"
+            className="chatPage__chatPanel__bottom-bar__button font__heading"
           >
             Send
           </button>

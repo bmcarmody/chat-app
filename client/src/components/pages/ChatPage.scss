@@ -9,6 +9,7 @@
     color: white;
     h1 {
       padding: 2rem;
+      font-size: 2.5rem;
     }
     &__users {
       list-style: none;
@@ -29,19 +30,21 @@
     width: 100%;
     &__chat {
       list-style: none;
+      overflow: auto;
+      height: calc(100% - 6rem);
     }
 
     &__bottom-bar {
       position: absolute;
       bottom: 0;
-      left: 0;
+      display: flex;
       width: 100%;
 
       &__input {
         height: 6rem;
-        width: calc(100% - 10rem);
+        width: 100%;
         padding: 1rem;
-        font-size: 1.5rem;
+        font-size: 2rem;
       }
 
       &__button {
@@ -50,6 +53,7 @@
         background: #e74c3c;
         color: white;
         outline: none;
+        font-size: 2rem;
       }
     }
   }

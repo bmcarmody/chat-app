@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Karla|Rubik:500');
+
 *,
 *::after,
 *::before {
@@ -11,6 +13,12 @@ html {
   font-size: 62.5%;
 }
 
-body {
+body,
+input {
   box-sizing: border-box;
+  font-family: 'Karla', sans-serif;
+}
+
+.font__heading {
+  font-family: 'Rubik', sans-serif;
 }

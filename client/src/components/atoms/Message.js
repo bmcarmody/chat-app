@@ -4,13 +4,8 @@ import moment from 'moment';
 const Message = props => {
   return (
     <li className="message">
-      <img
-        src="https://picsum.photos/200"
-        alt="Random"
-        className="message__image"
-      />
       <div className="message__title">
-        <h4>{props.from}</h4>
+        <h4 className="font__heading message__from">{props.from}</h4>
         <div className="message__createdAt">
           {moment(props.createdAt).format('h:mm a')}
         </div>
