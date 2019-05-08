@@ -1,4 +1,4 @@
-.chatPage {
+.chat {
   display: flex;
   height: 100vh;
   position: relative;
@@ -27,10 +27,11 @@
 
     &__exit {
       border: none;
-      background: #e74c3c;
+      background: none;
+      color: #e74c3c;
+      border: 3px solid #e74c3c;
       width: 20rem;
       height: 4rem;
-      color: white;
       position: absolute;
       bottom: 0;
       transform: translate(-50%, -50%);
@@ -41,6 +42,9 @@
       &:hover,
       &:focus {
         cursor: pointer;
+        border: none;
+        background: #e74c3c;
+        color: white;
       }
     }
   }
@@ -65,6 +69,12 @@
         width: 100%;
         padding: 1rem;
         font-size: 2rem;
+        outline: none;
+
+        &:focus {
+          border: 1px solid #595959;
+          padding: 1.1rem;
+        }
       }
 
       &__button {
@@ -75,6 +85,12 @@
         background: #e74c3c;
         color: white;
         font-size: 2rem;
+
+        &:focus,
+        &:hover {
+          background: darken(#e74c3c, 10%);
+          cursor: pointer;
+        }
       }
     }
   }

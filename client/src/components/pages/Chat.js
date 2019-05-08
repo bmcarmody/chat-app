@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import Message from '../atoms/Message';
 import SocketContext from '../../store/socket-context';
 
-const ChatPage = props => {
+const Chat = props => {
   const [text, setText] = useState('');
   const [chat, setChat] = useState([]);
   const [userList, setUserList] = useState([]);
@@ -45,26 +45,26 @@ const ChatPage = props => {
   });
 
   return (
-    <div className="chatPage">
-      <div className="chatPage__userPanel">
+    <div className="chat">
+      <div className="chat__userPanel">
         <h1 className="font__heading">Users</h1>
-        <ul className="chatPage__userPanel__users">
+        <ul className="chat__userPanel__users">
           {userList.map(user => (
             <li key={user}>{user}</li>
           ))}
         </ul>
         <button
-          className="chatPage__userPanel__exit font__heading"
+          className="chat__userPanel__exit font__heading"
           onClick={exitRoom}
         >
           Exit Chat Room
         </button>
       </div>
-      <div className="chatPage__chatPanel">
-        <ol className="chatPage__chatPanel__chat">
+      <div className="chat__chatPanel">
+        <ol className="chat__chatPanel__chat">
           {chat.map(message => message)}
         </ol>
-        <div className="chatPage__chatPanel__bottom-bar">
+        <div className="chat__chatPanel__bottom-bar">
           <input
             name="message"
             type="text"
@@ -72,13 +72,13 @@ const ChatPage = props => {
             autoFocus
             autoComplete="off"
             onChange={onChange}
-            className="chatPage__chatPanel__bottom-bar__input"
+            className="chat__chatPanel__bottom-bar__input"
             value={text}
             onKeyPress={onEnter}
           />
           <button
             onClick={sendMessage}
-            className="chatPage__chatPanel__bottom-bar__button font__heading"
+            className="chat__chatPanel__bottom-bar__button font__heading"
           >
             Send
           </button>
@@ -88,4 +88,4 @@ const ChatPage = props => {
   );
 };
 
-export default ChatPage;
+export default Chat;

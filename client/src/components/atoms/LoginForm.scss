@@ -1,0 +1,55 @@
+.loginForm {
+  background: white;
+  width: fit-content;
+  padding: 2rem;
+  border-radius: 1rem;
+  font-size: 2.25rem;
+
+  h1 {
+    text-align: center;
+  }
+
+  hr {
+    margin-bottom: 2rem;
+  }
+
+  &__group {
+    padding-bottom: 2.5rem;
+  }
+
+  input {
+    margin-top: 0.5rem;
+    width: 45rem;
+    height: 3.5rem;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+
+    &:focus {
+      outline: none;
+      border: 1px solid #1d2534;
+      padding-left: 6px;
+    }
+  }
+
+  button {
+    font-size: 2rem;
+    width: 100%;
+    padding: 0.5rem;
+    height: 4rem;
+    color: white;
+    background: #e74c3c;
+
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background: darken(#e74c3c, 10%);
+    }
+  }
+
+  &__error {
+    float: right;
+    color: red;
+  }
+}

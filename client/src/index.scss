@@ -2,6 +2,8 @@
 
 // Atoms
 @import './components/atoms/Message.scss';
+@import './components/atoms/LoginForm.scss';
 
 // Pages
-@import './components/pages/ChatPage.scss';
+@import './components/pages/Home.scss';
+@import './components/pages/Chat.scss';

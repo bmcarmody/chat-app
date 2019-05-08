@@ -21,7 +21,7 @@ io.on('connection', socket => {
     if (!isRealString(params.name) || !isRealString(params.room)) {
       const errors = {};
       if (!isRealString(params.name)) {
-        errors.name = 'Name is required';
+        errors.name = 'Username is required';
       }
 
       if (!isRealString(params.room)) {
