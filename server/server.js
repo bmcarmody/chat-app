@@ -13,6 +13,18 @@ const server = http.createServer(app);
 const io = socketIO(server);
 const users = new Users();
 
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, '../', 'client', 'build', 'index.html')
+    );
+  });
+}
+
 io.on('connection', socket => {
   socket.on('join', (params, callback) => {
     if (!isRealString(params.name) || !isRealString(params.room)) {
@@ -105,18 +117,6 @@ io.on('connection', socket => {
     }
   });
 });
-
-// Serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('client/build'));
-
-  app.get('*', (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, '../', 'client', 'build', 'index.html')
-    );
-  });
-}
 
 server.listen(port, () => {
   console.log(`Started on port ${port}`);
