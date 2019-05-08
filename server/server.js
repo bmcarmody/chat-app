@@ -3,7 +3,7 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 
-const { generateMessage, generateLocationMessage } = require('./utils/message');
+const { generateMessage } = require('./utils/message');
 const { isRealString } = require('../server/utils/validation');
 const { Users } = require('./utils/users');
 
@@ -55,6 +55,19 @@ io.on('connection', socket => {
     }, 500);
 
     callback();
+  });
+
+  socket.on('roomExit', () => {
+    let user = users.removeUser(socket.id);
+    socket.leave(user.room);
+
+    if (user) {
+      io.to(user.room).emit('updateUserList', users.getUserList(user.room));
+      io.to(user.room).emit(
+        'newMessage',
+        generateMessage('Admin', `${user.name} has left`)
+      );
+    }
   });
 
   socket.on('createMessage', function(message, callback) {

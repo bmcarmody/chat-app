@@ -20,6 +20,7 @@ const Chat = props => {
   };
 
   const exitRoom = () => {
+    socket.emit('roomExit');
     props.history.push('/');
   };
 
