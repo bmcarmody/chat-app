@@ -9,10 +9,10 @@ const { Users } = require('./utils/users');
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 5000;
-let app = express();
-let server = http.createServer(app);
-let io = socketIO(server);
-let users = new Users();
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
+const users = new Users();
 
 app.use(express.static(publicPath));
 
@@ -71,7 +71,7 @@ io.on('connection', socket => {
   });
 
   socket.on('roomExit', () => {
-    let user = users.removeUser(socket.id);
+    const user = users.removeUser(socket.id);
     socket.leave(user.room);
 
     if (user) {
@@ -84,7 +84,7 @@ io.on('connection', socket => {
   });
 
   socket.on('createMessage', function(message, callback) {
-    let user = users.getUser(socket.id);
+    const user = users.getUser(socket.id);
 
     if (user && isRealString(message.text)) {
       io.to(user.room).emit(
@@ -97,7 +97,7 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
-    let user = users.removeUser(socket.id);
+    const user = users.removeUser(socket.id);
 
     if (user) {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));
@@ -108,6 +108,18 @@ io.on('connection', socket => {
     }
   });
 });
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, '../', 'client', 'build', 'index.html')
+    );
+  });
+}
 
 server.listen(port, () => {
   console.log(`Started on port ${port}`);

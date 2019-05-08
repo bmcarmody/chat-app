@@ -38,32 +38,32 @@ describe('User', () => {
   });
 
   it('Should remove a user', () => {
-    let removedUser = users.removeUser(1);
+    const removedUser = users.removeUser(1);
     expect(removedUser.id).toEqual(1);
   });
 
   it('Should not remove a user', () => {
-    let removedUser = users.removeUser(400);
+    const removedUser = users.removeUser(400);
     expect(removedUser).toBeUndefined();
   });
 
   it('Should find user', () => {
-    let foundUser = users.getUser(2);
+    const foundUser = users.getUser(2);
     expect(foundUser.name).toEqual('Jim');
   });
 
   it('Should not find user', () => {
-    let foundUser = users.getUser(5);
+    const foundUser = users.getUser(5);
     expect(foundUser).toBeUndefined();
   });
 
   it('Should return names for A', () => {
-    let userList = users.getUserList('A');
+    const userList = users.getUserList('A');
     expect(userList).toEqual(['Bob', 'Bo']);
   });
 
   it('Should return names for B', () => {
-    let userList = users.getUserList('B');
+    const userList = users.getUserList('B');
     expect(userList).toEqual(['Jim']);
   });
 });

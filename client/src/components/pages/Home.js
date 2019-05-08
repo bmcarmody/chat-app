@@ -6,6 +6,9 @@ const Home = () => {
   return (
     <div className="home">
       <LoginForm />
+      <div className="footer">
+        Created by &copy; {new Date().getFullYear()} Brandon Carmody{' '}
+      </div>
     </div>
   );
 };
