@@ -31,6 +31,19 @@ io.on('connection', socket => {
       callback(errors);
     }
 
+    if (users) {
+      const errors = {};
+
+      users.users.map(user => {
+        if (params.name === user.name) {
+          params = {};
+          errors.name = 'Username is already taken';
+
+          callback(errors);
+        }
+      });
+    }
+
     socket.join(params.room);
     users.removeUser(socket.id);
     users.addUser(socket.id, params.name, params.room);

@@ -95,3 +95,24 @@
     }
   }
 }
+
+@media screen and (max-width: 1023px) {
+  .chat {
+    &__userPanel {
+      display: none;
+    }
+
+    &__chat {
+      height: calc(100% - 12rem);
+    }
+
+    &__chatPanel {
+      &__bottom-bar {
+        display: block;
+        &__button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
