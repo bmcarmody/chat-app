@@ -9,6 +9,23 @@ const Chat = props => {
 
   const socket = useContext(SocketContext);
 
+  const scrollToBottom = () => {
+    const chat = document.querySelector('.chat__chatPanel__chat');
+    let newMessage = chat.lastElementChild;
+    const clientHeight = chat.clientHeight;
+    const scrollTop = chat.scrollTop;
+    const scrollHeight = chat.scrollHeight;
+    const newMessageHeight = newMessage.clientHeight;
+    const lastMessageHeight = newMessage.clientHeight;
+
+    if (
+      clientHeight + scrollTop + newMessageHeight + lastMessageHeight >=
+      scrollHeight
+    ) {
+      chat.scrollTop = scrollHeight;
+    }
+  };
+
   const onChange = e => {
     setText(e.target.value);
   };
@@ -39,6 +56,7 @@ const Chat = props => {
         key={message.createdAt}
       />
     ]);
+    scrollToBottom();
   });
 
   socket.on('updateUserList', users => {

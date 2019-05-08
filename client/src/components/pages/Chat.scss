@@ -102,11 +102,10 @@
       display: none;
     }
 
-    &__chat {
-      height: calc(100% - 12rem);
-    }
-
     &__chatPanel {
+      &__chat {
+        height: calc(100% - 12rem);
+      }
       &__bottom-bar {
         display: block;
         &__button {
