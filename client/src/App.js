@@ -7,8 +7,7 @@ import SocketContext from './store/socket-context';
 import Home from './components/pages/Home';
 import Chat from './components/pages/Chat';
 
-const endpoint = 'http://localhost:5000';
-const socket = io(endpoint);
+const socket = io();
 
 const App = () => {
   return (
